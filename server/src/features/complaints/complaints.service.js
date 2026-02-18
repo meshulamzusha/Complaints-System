@@ -1,0 +1,20 @@
+import { getSupabaseClient } from "../../db/supabase.js";
+
+const supabase = getSupabaseClient();
+
+const create = async (complaint) => {
+  const { data, error } = await supabase
+    .from("complaints")
+    .insert({ category: complaint.category, content: complaint.content })
+    .select();
+
+    if (error) {
+        console.log("Error while insert complaint: ", error)
+    }
+
+    return data 
+};
+
+export default {
+    create,
+}
