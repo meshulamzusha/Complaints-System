@@ -8,13 +8,24 @@ const create = async (complaint) => {
     .insert({ category: complaint.category, content: complaint.content })
     .select();
 
-    if (error) {
-        console.log("Error while insert complaint: ", error)
-    }
+  if (error) {
+    console.log("Error while insert complaint: ", error);
+  }
 
-    return data 
+  return data;
+};
+
+const getAll = async () => {
+  const { data, error } = await supabase.from("complaints").select();
+
+  if (error) {
+    console.log("Error while fetching complaint: ", error);
+  }
+
+  return data;
 };
 
 export default {
-    create,
-}
+  create,
+  getAll,
+};

@@ -18,6 +18,26 @@ const create = (req, res) => {
   });
 };
 
+const getAll = async (req, res) => {
+  const complaints = await service.getAll();
+
+  if (!complaints) {
+    return res.status(500).json({
+      ok: false,
+      code: 500,
+      message: "Receiving complaints failed..",
+    });
+  }
+
+  res.status(200).json({
+    ok: true,
+    code: 200,
+    message: "The complaints was received successfully.",
+    complaints: complaints,
+  });
+};
+
 export default {
-    create,
-}
+  create,
+  getAll,
+};
