@@ -5,7 +5,11 @@ const supabase = getSupabaseClient();
 const create = async (complaint) => {
   const { data, error } = await supabase
     .from("complaints")
-    .insert({ category: complaint.category, content: complaint.content })
+    .insert({
+      category: complaint.category,
+      content: complaint.content,
+      created_at: new Date().toLocaleString(),
+    })
     .select();
 
   if (error) {

@@ -9,7 +9,7 @@ const ComplaintsList = () => {
 
   const fetchComplaints = async () => {
     try {
-      const response = fetch("http://localhost:3000/api/complaints", {
+      const response = await fetch("http://localhost:3000/api/complaints", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -26,13 +26,17 @@ const ComplaintsList = () => {
 
   useEffect(() => {
     fetchComplaints();
-  }, [complaints]);
+  }, []);
 
   return (
     <div>
       <ul>
-        {messages.map((c) => (
-          <li key={m.id}>{c.category}{c.content}{c.created_at}</li>
+        {complaints.map((c) => (
+          <li key={c.id}>
+            {c.category}
+            {c.content}
+            {c.created_at}
+          </li>
         ))}
       </ul>
     </div>
