@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router";
 
 const AdminLoginForm = () => {
+  let navigate = useNavigate()
   const { setToken } = useContext(AuthContext);
   const handelSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +22,7 @@ const AdminLoginForm = () => {
     const result = await response.json();
     if (result.ok) {
       setToken(result.token);
-      Navigate("/admin");
+      navigate("/admin");
     }
   };
   return (
